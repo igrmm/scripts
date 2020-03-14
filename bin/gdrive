@@ -1,0 +1,29 @@
+#!/bin/bash
+
+[ "$(cat /etc/hostname)" != "desktop" ] && echo "not your desktop" && exit
+
+function pull() {
+	rclone sync gdrive: ~/gdrive -P -v
+	notify-send \
+		"Google Drive" \
+		"Google Drive is synched."  \
+		--icon=~/.local/share/icons/gdrive.png
+}
+
+function push() {
+	rclone sync ~/gdrive gdrive: -P -v
+}
+
+for i in "$@"; do
+	case $i in
+		pull)
+			pull
+			;;
+		push)
+			push
+			;;
+		*)
+			exit
+			;;
+	esac
+done
