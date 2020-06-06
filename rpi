@@ -1,0 +1,48 @@
+---------------------------------------------------------------------------------------------------
+INSTALACAO
+
+login as root
+loadkeys br-abnt2
+nano /etc/vconsole.conf add KEYMAP=br-abnt2
+nano /boot/config.txt add disable-overscan=1 and reboot
+userdel -r alarm
+pacman-key --init
+pacman-key --populate archlinuxarm
+pacman -Syu
+pacman -S sudo
+EDITOR=nano visudo and uncomment %wheel ALL=(ALL) ALL
+useradd -m -G wheel -s /bin/bash user
+pacman -S base base-devel
+nano /etc/pacman.conf and uncomment color
+pacman -S xf86-video-fbturbo-git xorg xorg-xinit xterm
+pacman -S i3-gaps i3status dmenu
+cp /etc/X11/xinit/xinitrc /home/ksic/.xinitrc
+nano .xinitrc add setxkbmap br & exec dbus-launch i3
+nano /etc/environment add TERMINAL=xterm and reboot
+nano /boot/config.txt add dtparam=audio=on
+pacman -S alsa-utils
+amixer set PCM 100%
+pacman -S firefox
+
+24gb livres, 23.6gb segundo i3 depois de instalar polybar, firefox ocupa mto espaco ao navegar
+
+---------------------------------------------------------------------------------------------------
+CONFIGURACOES ADICIONAIS
+
+timedatectl set-ntp true
+nano /etc/locale.gen
+locale-gen
+localectl set-locale LANG=pt_BR.UTF-8
+tzselect
+sudo timedatectl set-timezone 'America/Campo_Grande'
+
+---------------------------------------------------------------------------------------------------
+RETROARCH + EMULATIONSTATION
+
+yay -S sdl2-rbp-bin (isso removera sdl2 existente) 
+importante pq esse tem suporte a dispmanx
+
+(se for baixar do github, tem q ser 1.6.9 e usar os args para raspberry
+git clone https://aur.archlinux.org/retroarch-rbp.git
+edit PKGBUILD e adiciona as flags:
+--enable-dispmanx e --disable-x11

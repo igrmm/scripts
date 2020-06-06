@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+telegram-desktop -noupdate
+
+for i in "S@"; do
+	case $1 in
+		"startintray")
+			xdotool search --maxdepth 1 --onlyvisible --class "Telegram" windowclose
+			;;
+		*)
+			xdotool search --maxdepth 1 --onlyvisible --class "Telegram" windowsize 380 480 windowmove 1730 840
+	esac
+done

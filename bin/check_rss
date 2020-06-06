@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+if ! pgrep -x newsboat >/dev/null; then
+	newsboat -u ~/dotfiles/newsboat/urls -x reload print-unread | awk '{print $1}' |& tee /tmp/newsboat-unread
+	notify-send \
+		"Rss feed has been updated." \
+		"You have $(cat /tmp/newsboat-unread) unread news." \
+		--icon=~/.local/share/icons/rss.png
+	# update dwmbar
+	dwmbar
+else
+	notify-send "Newsboat is already running."
+fi

@@ -1,0 +1,29 @@
+#!/bin/bash
+
+LAUNCHING_NEWSBOAT=false
+
+launch_newsboat() {
+if ! pgrep -x newsboat >/dev/null
+then
+	LAUNCHING_NEWSBOAT=true
+	i3-msg "exec --no-startup-id $TERMINAL -e newsboat" >/dev/null
+else
+	notify-send "Newsboat is already running."
+fi
+}
+
+case $BLOCK_BUTTON in
+	1) launch_newsboat ;;
+esac
+
+if ! pgrep -x newsboat >/dev/null && ! $LAUNCHING_NEWSBOAT
+then
+	notify-send "Updating RSS feed."
+	newsboat -x reload print-unread | awk '{print $1}' > /tmp/newsboat-unread
+fi
+
+UNREAD=$(cat /tmp/newsboat-unread)
+
+if [ "$UNREAD" -gt 0 ]; then
+	echo " "$UNREAD
+fi

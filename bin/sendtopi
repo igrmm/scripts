@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+
+scp "$@" rpi:/media/files/dump/
+
+notify-send \
+	"File is sent to Pi!" \
+	"$(echo $@)" \
+	--icon=~/.local/share/icons/rpi.jpeg

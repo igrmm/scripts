@@ -1,0 +1,22 @@
+#!/bin/bash
+
+CMD=$(echo -e "power off\nreboot\nlock\nlog off")
+
+INPUT=$(echo -e "$CMD" | dmenu -fn "monospace:size=12")
+
+case "$INPUT" in
+	"power off")
+		poweroff
+		;;
+	"reboot")
+		reboot
+		;;
+	"lock")
+		lock
+		;;
+	"log off")
+		killall i3
+		;;
+	*)
+		exit
+esac

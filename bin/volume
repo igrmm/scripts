@@ -1,0 +1,20 @@
+#!/bin/sh
+
+case "$1" in
+	"raise")
+		amixer sset Master 5%+
+		;;
+	"lower")
+		amixer sset Master 5%-
+		;;
+	"mute")
+		amixer sset Master 0%
+		;;
+	"max")
+		amixer sset Master 100%
+		;;
+	*)
+		exit
+esac
+
+dwmbar

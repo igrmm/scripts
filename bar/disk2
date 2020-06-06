@@ -1,0 +1,2 @@
+#!/bin/sh
+echo " $(df -h /media/files | awk 'NR==2 {print $4}')   $(df -h $HOME | awk 'NR==2 {print $4}')"

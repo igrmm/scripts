@@ -1,0 +1,56 @@
+#!/bin/sh
+
+_time() {
+	echo -n " $(date '+%H:%M')"
+}
+
+_date() {
+	echo -n " $(date '+%Y-%m-%d')"
+}
+
+_disk_usage_home() {
+	echo -n " $(df -h $HOME | awk 'NR==2 {print $4}')"
+}
+
+_disk_usage_storage() {
+	echo -n " $(df -h /media/files | awk 'NR==2 {print $4}')"
+}
+
+_volume() {
+	echo -n " $(amixer sget Master | awk -F"[][]" '/dB/ { print $2 }')"
+}
+
+_pacman() {
+	if [ -e /tmp/pacman_updates ]; then
+		updates="$(cat /tmp/pacman_updates)"
+		if [ "$updates" -gt 0 ] && [ "$updates" != "" ]; then
+			echo -ne "\x02 $updates  "
+		fi
+	fi
+}
+
+_check_repositories() {
+	if [ -e /tmp/check_repositories ]; then
+		check_repositories="$(cat /tmp/check_repositories)"
+		if [ "$check_repositories" != "0|0" ] && [ "$check_repositories" != "" ]; then
+			echo -n " $check_repositories  "
+		fi
+	fi
+}
+
+_rss() {
+	if [ -e /tmp/newsboat-unread ]; then
+		unread="$(cat /tmp/newsboat-unread)"
+		if [ "$unread" -gt 0 ] && [ "$unread" != "" ]; then
+			echo -ne "\x03 $unread  "
+		fi
+	fi
+}
+
+if [ "$(cat /etc/hostname)" = "laptop" ]; then
+	xsetroot -name "$(_check_repositories)$(_pacman)$(_rss)$(_volume)  $(_disk_usage_home)  $(_date)  $(_time)"
+elif [ "$(cat /etc/hostname)" = "desktop" ]; then
+	xsetroot -name "$(_check_repositories)$(_pacman)$(_rss)$(_volume)  $(_disk_usage_storage)  $(_disk_usage_home)  $(_date)  $(_time)"
+elif [ "$(cat /etc/hostname)" = "vm" ]; then
+	xsetroot -name "$(_check_repositories)$(_pacman)$(_rss)$(_disk_usage_home)  $(_date)  $(_time)"
+fi

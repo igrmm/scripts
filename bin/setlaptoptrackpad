@@ -1,0 +1,10 @@
+#!/bin/bash
+
+HOSTNAME=$(cat /etc/hostname)
+
+if [ $HOSTNAME = "laptop" ]; then
+	exec xinput set-prop "ETPS/2 Elantech Touchpad" "libinput Tapping Enabled" 1
+else
+	echo You are not in your laptop.
+fi
+

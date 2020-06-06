@@ -1,0 +1,29 @@
+#!/bin/sh
+
+for i in "$@"; do
+	case $1 in
+		fullscreen)
+			maim $HOME/screenshot_$(date +"%Y-%m-%d_%H:%M:%S").png
+			notify-send \
+				"Screen Shot taken!" \
+				"It has been saved to home dir." \
+				--icon=~/.local/share/icons/screenshot.png
+							;;
+		selection)
+			maim -s | xclip -selection clipboard -t image/png
+			notify-send \
+				"Screen Shot taken!" \
+				"It has been copied to clipboard." \
+				--icon=~/.local/share/icons/screenshot.png
+							;;
+
+		selection-edit)
+			ssname="screenshot_$(date +"%Y-%m-%d_%H:%M:%S").png"
+			maim -s /tmp/$ssname && aseprite /tmp/$ssname &
+			notify-send \
+				"Screen Shot taken!" \
+				"Edit in aseprite" \
+				--icon=~/.local/share/icons/screenshot.png
+							;;
+	esac
+done
