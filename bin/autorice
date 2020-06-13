@@ -161,6 +161,8 @@ ln -s "$DOTFILES"/.local/share/applications/vifm.desktop \
 	~/.local/share/applications/vifm.desktop && \
 	echo "vifm.desktop linked."
 
+mkdir -p ~/.cache/nvidia
+
 #if [ "$POST_INSTALLATION" = true ]; then
 #	git clone https://aur.archlinux.org/yay.git
 #	cd yay && makepkg -Asci && cd .. && rm -rf yay
