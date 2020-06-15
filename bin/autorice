@@ -164,6 +164,9 @@ ln -s "$DOTFILES"/.local/share/applications/vifm.desktop \
 	"$XDG_DATA_HOME"/applications/vifm.desktop && \
 	echo "vifm.desktop linked."
 
+# LINK HDD
+ln -s /media/files ~/files
+
 #if [ "$POST_INSTALLATION" = true ]; then
 #	git clone https://aur.archlinux.org/yay.git
 #	cd yay && makepkg -Asci && cd .. && rm -rf yay
