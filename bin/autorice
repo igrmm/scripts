@@ -25,9 +25,8 @@ ln -s "$DOTFILES"/.zprofile ~/.zprofile && \
 
 rm -rf "$XDG_CONFIG_HOME"/zsh
 mkdir "$XDG_CONFIG_HOME"/zsh
-mkdir -p ~/.cache/zsh
+mkdir -p "$XDG_CACHE_HOME"/zsh
 
-rm -rf "$XDG_CONFIG_HOME"/zsh/.zshrc
 ln -s "$DOTFILES"/.config/zsh/.zshrc \
 	"$XDG_CONFIG_HOME"/zsh/.zshrc && echo ".zshrc linked."
 
@@ -79,10 +78,12 @@ ln -s "$DOTFILES"/.config/gtk-3.0/settings.ini \
 
 rm -rf "$XDG_CONFIG_HOME"/newsboat
 mkdir "$XDG_CONFIG_HOME"/newsboat
+
 ln -s "$DOTFILES"/.config/newsboat/config \
 	"$XDG_CONFIG_HOME"/newsboat/config && \
 	echo "newsboat folder created and config linked."
-	ln -s "$DOTFILES"/.config/newsboat/urls \
+
+ln -s "$DOTFILES"/.config/newsboat/urls \
 		"$XDG_CONFIG_HOME"/newsboat/urls && \
 		echo "newsboat urls linked."
 
@@ -119,6 +120,7 @@ ln -s "$DOTFILES"/.config/vifm/colors \
 
 rm -rf "$XDG_CONFIG_HOME"/tmux
 mkdir "$XDG_CONFIG_HOME"/tmux
+
 ln -s "$DOTFILES"/.config/tmux/tmux.conf \
 	"$XDG_CONFIG_HOME"/tmux/tmux.conf && \
 	echo "tmux folder created and tmux.conf linked."
@@ -140,10 +142,11 @@ echo "done."
 # THEME CURSOR
 [ ! -f "$DOTFILES"/.local/share/icons/default/index.theme ] && echo "!icons" && exit
 
-rm -rf ~/.local/share/icons/default
-mkdir -p ~/.local/share/icons/default
+rm -rf "$XDG_DATA_HOME"/icons/default
+mkdir -p "$XDG_DATA_HOME"/icons/default
+
 ln -s "$DOTFILES"/.local/share/icons/default/index.theme \
-	~/.local/share/icons/default/index.theme && \
+	"$XDG_DATA_HOME"/icons/default/index.theme && \
 	echo "Icon theme linked."
 
 # MIME APPS
@@ -154,11 +157,11 @@ ln -s "$DOTFILES"/.config/mimeapps.list \
 	"$XDG_CONFIG_HOME"/mimeapps.list && \
 	echo "mimeapps.list linked."
 
-rm -rf ~/.local/share/applications
-mkdir -p ~/.local/share/applications
+rm -rf "$XDG_DATA_HOME"/applications
+mkdir -p "$XDG_DATA_HOME"/applications
 
 ln -s "$DOTFILES"/.local/share/applications/vifm.desktop \
-	~/.local/share/applications/vifm.desktop && \
+	"$XDG_DATA_HOME"/applications/vifm.desktop && \
 	echo "vifm.desktop linked."
 
 #if [ "$POST_INSTALLATION" = true ]; then
