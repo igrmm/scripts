@@ -3,7 +3,7 @@
 [ "$(cat /etc/hostname)" != "desktop" ] && echo "not your desktop" && exit
 
 function pull() {
-	rclone sync gdrive: ~/gdrive -P -v
+	rclone sync gdrive: "$GDRIVE_PATH" -P -v
 	notify-send \
 		"Google Drive" \
 		"Google Drive is synched."  \
@@ -11,7 +11,7 @@ function pull() {
 }
 
 function push() {
-	rclone sync ~/gdrive gdrive: -P -v
+	rclone sync "$GDRIVE_PATH" gdrive: -P -v
 }
 
 for i in "$@"; do
