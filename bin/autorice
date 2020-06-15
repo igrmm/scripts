@@ -161,10 +161,6 @@ ln -s "$DOTFILES"/.local/share/applications/vifm.desktop \
 	~/.local/share/applications/vifm.desktop && \
 	echo "vifm.desktop linked."
 
-# Will launch every program that is not compliant with XDG with HOME="$XDG_CONFIG_HOME"
-ln -s ~/.local "$XDG_CONFIG_HOME"/.local
-ln -s ~/.cache "$XDG_CONFIG_HOME"/.cache
-
 #if [ "$POST_INSTALLATION" = true ]; then
 #	git clone https://aur.archlinux.org/yay.git
 #	cd yay && makepkg -Asci && cd .. && rm -rf yay
