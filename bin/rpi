@@ -1,0 +1,19 @@
+#!/usr/bin/sh
+
+for i in "$@"; do
+	case $i in
+		mount)
+			sshfs \
+				-F $XDG_CONFIG_HOME/ssh/config \
+				-oIdentityFile=$XDG_CONFIG_HOME/ssh/id_rsa \
+				-oUserKnownHostsFile=$XDG_CONFIG_HOME/ssh/known_hosts \
+				rpi:/media/files/ /media/rpi
+			;;
+		umount)
+			fusermount3 -u /media/rpi
+			;;
+		*)
+			exit
+			;;
+	esac
+done
