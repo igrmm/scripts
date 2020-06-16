@@ -1,0 +1,19 @@
+#!/usr/bin/sh
+
+for i in "$@"; do
+	case $i in
+		mount)
+			sshfs \
+				-F $XDG_CONFIG_HOME/ssh/config \
+				-oIdentityFile=$XDG_CONFIG_HOME/ssh/id_rsa \
+				-oUserKnownHostsFile=$XDG_CONFIG_HOME/ssh/known_hosts \
+				android:/storage/emulated/0/ /media/android
+			;;
+		umount)
+			fusermount3 -u /media/android
+			;;
+		*)
+			exit
+			;;
+	esac
+done
