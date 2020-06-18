@@ -6,5 +6,10 @@
 # >  https://github.com/openjdk/jdk/blob/master/src/java.desktop/unix/classes/sun/font/FcFontConfiguration.java
 # >  private File getFcInfoFile()
 
+# Prevent ~/.android/*keys*
+HOME="$XDG_DATA_HOME/android"
 
-_JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=$XDG_DATA_HOME" /usr/bin/idea "$@"
+# Prevent ~/.java/fonts
+_JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=$XDG_DATA_HOME"
+
+/usr/bin/idea "$@"
