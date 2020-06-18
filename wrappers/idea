@@ -7,4 +7,4 @@
 # >  private File getFcInfoFile()
 
 
-_JAVA_OPTIONS="-Duser.home=$XDG_DATA_HOME" /usr/bin/idea "$@"
+_JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=$XDG_DATA_HOME" /usr/bin/idea "$@"
