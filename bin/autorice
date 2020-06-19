@@ -159,6 +159,16 @@ ln -s "$DOTFILES"/.config/picom/picom.conf \
 	"$XDG_CONFIG_HOME"/picom/picom.conf && \
 	echo "picom linked."
 
+# DUNST
+[ ! -f "$DOTFILES"/.config/dunst/dunstrc ] && echo "!dunst" && exit
+
+rm -rf "$XDG_CONFIG_HOME"/dunst
+mkdir "$XDG_CONFIG_HOME"/dunst
+
+ln -s "$DOTFILES"/.config/dunst/dunstrc \
+	"$XDG_CONFIG_HOME"/dunst/dunstrc && \
+	echo "dunst linked."
+
 # MIME APPS
 [ ! -f "$DOTFILES"/.config/mimeapps.list ] && echo "!mimeapps.list" && exit
 
