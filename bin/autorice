@@ -149,6 +149,16 @@ ln -s "$DOTFILES"/.local/share/icons/default/index.theme \
 	"$XDG_DATA_HOME"/icons/default/index.theme && \
 	echo "Icon theme linked."
 
+# PICOM
+[ ! -f "$DOTFILES"/.config/picom/picom.conf ] && echo "!picom" && exit
+
+rm -rf "$XDG_CONFIG_HOME"/picom
+mkdir "$XDG_CONFIG_HOME"/picom
+
+ln -s "$DOTFILES"/.config/picom/picom.conf \
+	"$XDG_CONFIG_HOME"/picom/picom.conf && \
+	echo "picom linked."
+
 # MIME APPS
 [ ! -f "$DOTFILES"/.config/mimeapps.list ] && echo "!mimeapps.list" && exit
 
