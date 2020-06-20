@@ -1,9 +1,12 @@
 #!/bin/sh
 
-/usr/bin/telegram-desktop
-
-[ "$1" = "floating" ] && \
+if [ "$1" = "floating" ]; then
+	/usr/bin/telegram-desktop
 	xdotool search \
-	--maxdepth 1 \
-	--onlyvisible \
-	--class "Telegram" windowsize 380 480 windowmove 1730 840
+		--maxdepth 1 \
+		--onlyvisible \
+		--class "Telegram" windowsize 380 480 windowmove 1730 840
+
+else
+	/usr/bin/telegram-desktop "$@"
+fi
