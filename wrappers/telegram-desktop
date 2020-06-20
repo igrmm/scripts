@@ -1,0 +1,9 @@
+#!/bin/sh
+
+/usr/bin/telegram-desktop
+
+[ "$1" = "floating" ] && \
+	xdotool search \
+	--maxdepth 1 \
+	--onlyvisible \
+	--class "Telegram" windowsize 380 480 windowmove 1730 840
