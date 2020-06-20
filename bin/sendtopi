@@ -1,6 +1,10 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
-scp "$@" rpi:/media/files/dump/
+scp \
+	-F "$XDG_CONFIG_HOME"/ssh/config \
+	-oIdentityFile="$XDG_CONFIG_HOME"/ssh/id_rsa \
+	-oUserKnownHostsFile="$XDG_CONFIG_HOME"/ssh/known_hosts \
+	"$@" rpi:/media/files/dump/
 
 notify-send \
 	"File is sent to Pi!" \
