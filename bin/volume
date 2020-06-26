@@ -17,4 +17,4 @@ case "$1" in
 		exit
 esac
 
-dwmbar
+~/projects/dwmbar/dwmbar VOLUME --fetch
