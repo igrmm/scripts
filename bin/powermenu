@@ -2,7 +2,7 @@
 
 CMD=$(echo -e "power off\nreboot\nlock\nlog off")
 
-INPUT=$(echo -e "$CMD" | dmenu -fn "monospace:size=12")
+INPUT=$(echo -e "$CMD" | rofi -dmenu)
 
 case "$INPUT" in
 	"power off")
@@ -15,7 +15,7 @@ case "$INPUT" in
 		lock
 		;;
 	"log off")
-		killall i3
+		bspc quit
 		;;
 	*)
 		exit
