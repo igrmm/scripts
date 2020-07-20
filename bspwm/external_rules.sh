@@ -26,3 +26,6 @@ WM_NAME() {
 			echo 'state=floating rectangle=380x480+770+300'
 			;;
 	esac
+
+# BAR
+case "$class" in _bar_*) echo 'state=floating' ;; esac
