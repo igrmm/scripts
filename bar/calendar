@@ -1,6 +1,0 @@
-#!/bin/bash
-
-calendar=$(cal)
-
-dunstify "$calendar" -u low
-

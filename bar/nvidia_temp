@@ -1,7 +1,0 @@
-#!/bin/bash
-
-USAGE=$(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader,nounits)
-TEMP=$(nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader)
-echo $TEMP°C
-
-
