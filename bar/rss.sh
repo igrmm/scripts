@@ -9,11 +9,10 @@ fetch() {
 	fi
 }
 
-trap fetch USR1
-
-fetch
+trap true USR1
 
 while true; do
+	fetch
 	sleep 900 &
 	wait
 done
