@@ -3,7 +3,11 @@
 fetch() {
 	if ! pgrep -x newsboat >/dev/null; then
 		unread="$(newsboat -x reload print-unread | awk '{print $1}')"
-		[ "$unread" -gt 0 ] && echo "$unread"
+		if [ "$unread" -gt 0 ]; then
+			echo "$unread"
+		else
+			echo ""
+		fi
 	else
 		notify-send "Newsboat is already running."
 	fi

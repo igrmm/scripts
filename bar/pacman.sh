@@ -2,8 +2,12 @@
 
 fetch() {
 	if ! pgrep -x checkupdates >/dev/null; then
-		updates="$(checkupdates 2>/dev/null | wc -l)"
-		[ "$updates" -gt 0 ] && echo "$updates"
+		updates="$(checkupdates | wc -l)"
+		if [ "$updates" -gt 0 ]; then
+			echo "$updates"
+		else
+			echo ""
+		fi
 	else
 		notify-send "checkupdates is already running."
 	fi
