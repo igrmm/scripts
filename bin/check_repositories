@@ -1,39 +1,41 @@
-#!/usr/bin/env sh
+#!/bin/sh
 
-declare -i AHEAD=0
-declare -i BEHIND=0
+EXIT() {
+	notify-send "check repositories failed"
+	exit 1
+}
 
-declare -a repo_list=(
-"$HOME/dotfiles"
-"$HOME/scripts"
-"$HOME/.suckless/dwm"
-"$HOME/.suckless/st"
-"$HOME/projects/gdx2d"
-)
+cd ~/repositories || EXIT
 
-for i in "${repo_list[@]}"; do
+sum_ahead=0
+sum_behind=0
+sum_status=0
 
-	cd "$i"
-
-	git fetch 2>/dev/null
-
-	GITSTATUS="$(git status)"
-
-	if [ "$(echo "$GITSTATUS" | grep "is ahead")" != "" ]; then
-		[ "$1" = "--verbose" ] && echo "$i"
-		AHEAD+="$(echo "$GITSTATUS" | grep "is ahead" | grep -o '[[:digit:]]*')"
-	elif [ "$(echo "$GITSTATUS" | grep "is behind")" != "" ]; then
-		[ "$1" = "--verbose" ] && echo "$i"
-		BEHIND+="$(echo "$GITSTATUS" | grep "is behind" | grep -o '[[:digit:]]*')"
-	elif [ "$(echo "$GITSTATUS" | grep "have diverged")" != "" ]; then
-		[ "$1" = "--verbose" ] && echo "$i"
-		declare -a DIVERGED=($(echo "$GITSTATUS" | grep "different commits" | grep -o '[[:digit:]]*'))
-		AHEAD+="${DIVERGED[0]}"
-		BEHIND+="${DIVERGED[1]}"
+for repo in *; do
+	cd "$repo" || EXIT
+	if [ -n "$(git remote 2>/dev/null)" ]; then
+		git fetch
+		branch="origin/$(sed 's;^.*/;;' .git/HEAD)"
+		behind="$(git rev-list HEAD.."$branch" --count)"
+		sum_behind=$((sum_behind+behind))
+		ahead="$(git rev-list "$branch"..HEAD --count)"
+		sum_ahead=$((sum_ahead+ahead))
+		status=0
+		if [ -n "$(git status -s --porcelain)" ]; then
+			status=1
+			sum_status=$((sum_status+status))
+		fi
+		if [ "$1" = "-v" ]; then
+			if [ "$ahead" -gt 0 ] || [ "$behind" -gt 0 ] || [ "$status" -gt 0 ]; then
+				echo "$repo : $branch $ahead|$behind|$status"
+			fi
+		fi
 	fi
+	cd ..
 done
 
-echo "$AHEAD|$BEHIND" |& tee /tmp/check_repositories
-
-# update dwmbar
-dwmbar
+if [ "$sum_ahead|$sum_behind|$sum_status" = "0|0|0" ]; then
+	echo ""
+else
+	echo "$sum_ahead|$sum_behind|$sum_status"
+fi
