@@ -8,6 +8,9 @@ WM_NAME() {
 	xprop -id "$wid" '\t$0' WM_NAME | cut -f 2
 }
 
+# Gdx2D
+[ "$class" = "Gdx2D" ] && echo 'state=floating'
+
 # FIREFOX
 [ "$class" = "firefox" ] && echo 'desktop=^10'
 
