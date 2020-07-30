@@ -4,6 +4,9 @@ wid="$1"
 class="$2"
 instance="$3"
 
+# remove shadows from borders
+xprop -id "$wid" -f _PICOM_SHADOW 32c -set _PICOM_SHADOW 1;
+
 WM_NAME() {
 	xprop -id "$wid" '\t$0' WM_NAME | cut -f 2
 }
