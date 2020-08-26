@@ -28,10 +28,10 @@ mount "$LINUX_PARTITION" /mnt
 mkdir /mnt/boot
 mount "$EFI_PARTITION" /mnt/boot
 
-pacstrap /mnt base linux linux-firmware broadcom-wl iwd neovim
+pacstrap /mnt base base-devel linux linux-firmware broadcom-wl iwd neovim
 genfstab -U /mnt >> /mnt/etc/fstab
 
-  cat <<EOF | arch-chroot /mnt
+cat <<EOF | arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/America/Campo_Grande /etc/localtime
 hwclock --systohc
 echo "pt_BR.UTF-8 UTF-8" >> /etc/locale.gen
