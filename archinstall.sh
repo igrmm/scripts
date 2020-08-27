@@ -31,6 +31,14 @@ mount "$EFI_PARTITION" /mnt/boot
 pacstrap /mnt base base-devel linux linux-firmware broadcom-wl iwd neovim
 genfstab -U /mnt >> /mnt/etc/fstab
 
+PARTUUID="$(blkid $LINUX_PARTITION -s PARTUUID -o value)"
+efibootmgr \
+	--disk $ESP \
+	--part $ESPPART \
+	--create --label "Arch Linux" \
+	--loader /vmlinuz-linux \
+	--unicode "root=$PARTUUID rw initrd=\intel-ucode.img initrd=\initramfs-linux.img"
+
 cat <<EOF | arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/America/Campo_Grande /etc/localtime
 hwclock --systohc
@@ -43,8 +51,6 @@ echo "KEYMAP=br-abnt2" > /etc/vconsole.conf
 echo "$HOSTNAME" > /etc/hostname
 
 { echo "$PASSWORD"; echo "$PASSWORD"; } | passwd
-
-bootctl install
 
 sed -i 's/#Color/Color/g' /etc/pacman.conf
 
