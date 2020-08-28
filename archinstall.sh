@@ -4,18 +4,16 @@
 # into the kernel, so no boot loader. This script uses only 1 disk and 2 partitions
 # the first for EFI (esp) and second for root.
 
-printf 'hostname: ' && read -r HOSTNAME
-printf 'username: ' && read -r USERNAME
-printf 'password: ' && read -r PASSWORD
-printf 'linux partition: ' && read -r LINUX_PARTITION
-printf 'efi partition: ' && read -r EFI_PARTITION
+printf 'hostname: '            && read -r HOSTNAME
+printf 'username: '            && read -r USERNAME
+printf 'password: '            && read -r PASSWORD
+printf 'disk (E.g. /dev/sd): ' && read -r DISK
 
 printf '\n'
-printf 'hostname:        %s\n' "$HOSTNAME"
-printf 'username:        %s\n' "$USERNAME"
-printf 'password:        %s\n' "$PASSWORD"
-printf 'linux partition: %s\n' "$LINUX_PARTITION"
-printf 'efi partition:   %s\n' "$EFI_PARTITION"
+printf 'hostname:         %s\n' "$HOSTNAME"
+printf 'username:         %s\n' "$USERNAME"
+printf 'password:         %s\n' "$PASSWORD"
+printf 'disk:             %s\n' "$DISK"
 printf '\n'
 printf 'Confirm? (y|n): ' && read -r CONFIRMATION
 
@@ -25,20 +23,23 @@ case "$CONFIRMATION" in
 	*) echo "exit" && exit ;;
 esac
 
+EFI_PARTITION=1
+LINUX_PARTITION=2
+
 timedatectl set-ntp true
 
-echo y | mkfs.ext4 "$LINUX_PARTITION"
-mount "$LINUX_PARTITION" /mnt
+echo y | mkfs.ext4 "$DISK$LINUX_PARTITION"
+mount "$DISK$LINUX_PARTITION" /mnt
 mkdir /mnt/boot
-mount "$EFI_PARTITION" /mnt/boot
+mount "$DISK$EFI_PARTITION" /mnt/boot
 
 pacstrap /mnt base base-devel linux linux-firmware broadcom-wl iwd neovim
 genfstab -U /mnt >> /mnt/etc/fstab
 
-PARTUUID="$(blkid $LINUX_PARTITION -s PARTUUID -o value)"
+PARTUUID="$(blkid $DISK$LINUX_PARTITION -s PARTUUID -o value)"
 efibootmgr \
-	--disk $ESP \
-	--part $ESPPART \
+	--disk $DISK \
+	--part $EFI_PARTITION \
 	--create --label "Arch Linux" \
 	--loader /vmlinuz-linux \
 	--unicode "root=$PARTUUID rw initrd=\intel-ucode.img initrd=\initramfs-linux.img"
