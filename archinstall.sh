@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Personal arch linux installation script. This uses EFISTUB for booting directly
+# into the kernel, so no boot loader. This script uses only 1 disk and 2 partitions
+# the first for EFI (esp) and second for root.
+
 printf 'hostname: ' && read -r HOSTNAME
 printf 'username: ' && read -r USERNAME
 printf 'password: ' && read -r PASSWORD
