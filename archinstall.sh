@@ -33,7 +33,7 @@ mount "$DISK$LINUX_PARTITION" /mnt
 mkdir /mnt/boot
 mount "$DISK$EFI_PARTITION" /mnt/boot
 
-pacstrap /mnt base base-devel linux linux-firmware broadcom-wl iwd neovim
+pacstrap /mnt base base-devel linux linux-firmware intel-ucode broadcom-wl iwd neovim
 genfstab -U /mnt >> /mnt/etc/fstab
 
 PARTUUID="$(blkid $DISK$LINUX_PARTITION -s PARTUUID -o value)"
@@ -42,7 +42,7 @@ efibootmgr \
 	--part $EFI_PARTITION \
 	--create --label "Arch Linux" \
 	--loader /vmlinuz-linux \
-	--unicode "root=$PARTUUID video=efifb:1920x1080 rw initrd=\intel-ucode.img initrd=\initramfs-linux.img"
+	--unicode "root=PARTUUID=$PARTUUID video=efifb:1920x1080 rw initrd=\intel-ucode.img initrd=\initramfs-linux.img"
 
 cat <<EOF | arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/America/Campo_Grande /etc/localtime
