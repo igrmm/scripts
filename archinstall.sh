@@ -42,7 +42,7 @@ efibootmgr \
 	--part $EFI_PARTITION \
 	--create --label "Arch Linux" \
 	--loader /vmlinuz-linux \
-	--unicode "root=$PARTUUID rw initrd=\intel-ucode.img initrd=\initramfs-linux.img"
+	--unicode "root=$PARTUUID video=efifb:1920x1080 rw initrd=\intel-ucode.img initrd=\initramfs-linux.img"
 
 cat <<EOF | arch-chroot /mnt
 ln -sf /usr/share/zoneinfo/America/Campo_Grande /etc/localtime
