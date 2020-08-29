@@ -7,13 +7,11 @@
 printf 'hostname: '            && read -r HOSTNAME
 printf 'username: '            && read -r USERNAME
 printf 'password: '            && read -r PASSWORD
-printf 'disk (E.g. /dev/sd): ' && read -r DISK
 
 printf '\n'
 printf 'hostname:         %s\n' "$HOSTNAME"
 printf 'username:         %s\n' "$USERNAME"
 printf 'password:         %s\n' "$PASSWORD"
-printf 'disk:             %s\n' "$DISK"
 printf '\n'
 printf 'Confirm? (y|n): ' && read -r CONFIRMATION
 
@@ -27,6 +25,7 @@ reflector --country Brazil --protocol https --protocol http --latest 10 --sort r
 
 EFI_PARTITION=1
 LINUX_PARTITION=2
+DISK=nvme0n1
 
 timedatectl set-ntp true
 
