@@ -36,7 +36,7 @@ mount "$DISK$LINUX_PARTITION" /mnt
 mkdir /mnt/boot
 mount "$DISK$EFI_PARTITION" /mnt/boot
 
-pacstrap /mnt base base-devel linux linux-firmware intel-ucode broadcom-wl iwd neovim
+pacstrap /mnt base linux linux-firmware base-devel intel-ucode linux-headers broadcom-wl-dkms nvidia-dkms nvidia-settings iwd
 genfstab -U /mnt >> /mnt/etc/fstab
 
 PARTUUID="$(blkid $DISK$LINUX_PARTITION -s PARTUUID -o value)"
