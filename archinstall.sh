@@ -30,9 +30,10 @@ LINUX_PARTITION=2
 
 timedatectl set-ntp true
 
-echo y | mkfs.ext4 "$DISK$LINUX_PARTITION"
-mount "$DISK$LINUX_PARTITION" /mnt
+mkfs.fat -F32 "$DISK$EFI_PARTITION"
+mkfs.ext4 "$DISK$LINUX_PARTITION"
 mkdir /mnt/boot
+mount "$DISK$LINUX_PARTITION" /mnt
 mount "$DISK$EFI_PARTITION" /mnt/boot
 
 pacstrap /mnt base base-devel linux linux-firmware intel-ucode broadcom-wl iwd neovim
