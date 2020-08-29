@@ -30,16 +30,16 @@ EFI_PARTITION_NUMBER=1
 
 timedatectl set-ntp true
 
-echo y | mkfs.fat -F32 "$DISK$EFI_PARTITION"
-echo y | mkfs.ext4 "$DISK$LINUX_PARTITION"
-mount "$DISK$LINUX_PARTITION" /mnt
+echo y | mkfs.fat -F32 "$EFI_PARTITION"
+echo y | mkfs.ext4 "$LINUX_PARTITION"
+mount "$LINUX_PARTITION" /mnt
 mkdir /mnt/boot
-mount "$DISK$EFI_PARTITION" /mnt/boot
+mount "$EFI_PARTITION" /mnt/boot
 
 pacstrap /mnt base linux linux-firmware 
 genfstab -U /mnt >> /mnt/etc/fstab
 
-PARTUUID="$(blkid $DISK$LINUX_PARTITION -s PARTUUID -o value)"
+PARTUUID="$(blkid $LINUX_PARTITION -s PARTUUID -o value)"
 efibootmgr \
 	--disk $DISK \
 	--part $EFI_PARTITION_NUMBER \
