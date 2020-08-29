@@ -23,8 +23,8 @@ esac
 
 reflector --country Brazil --protocol https --protocol http --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
-EFI_PARTITION=1
-LINUX_PARTITION=2
+EFI_PARTITION=p1
+LINUX_PARTITION=p2
 DISK=nvme0n1
 
 timedatectl set-ntp true
