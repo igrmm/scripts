@@ -23,6 +23,8 @@ case "$CONFIRMATION" in
 	*) echo "exit" && exit ;;
 esac
 
+reflector --country Brazil --protocol https --protocol http --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+
 EFI_PARTITION=1
 LINUX_PARTITION=2
 
