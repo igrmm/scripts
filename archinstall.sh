@@ -46,7 +46,7 @@ efibootmgr \
 	--loader /vmlinuz-linux \
 	--unicode "root=PARTUUID=$PARTUUID video=efifb:1920x1080 rw initrd=\intel-ucode.img initrd=\initramfs-linux.img"
 
-arch-chroot /mnt <<EOF
+arch-chroot /mnt /bin/sh <<EOF
 ln -sf /usr/share/zoneinfo/America/Campo_Grande /etc/localtime
 hwclock --systohc
 echo "pt_BR.UTF-8 UTF-8" >> /etc/locale.gen
