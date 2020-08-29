@@ -23,9 +23,10 @@ esac
 
 reflector --country Brazil --protocol https --protocol http --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
-EFI_PARTITION=p1
-LINUX_PARTITION=p2
-DISK=nvme0n1
+DISK="/dev/nvme0n1"
+EFI_PARTITION="$DISK"p1
+LINUX_PARTITION="$DISK"p2
+EFI_PARTITION_NUMBER=1
 
 timedatectl set-ntp true
 
@@ -41,12 +42,12 @@ genfstab -U /mnt >> /mnt/etc/fstab
 PARTUUID="$(blkid $DISK$LINUX_PARTITION -s PARTUUID -o value)"
 efibootmgr \
 	--disk $DISK \
-	--part $EFI_PARTITION \
+	--part $EFI_PARTITION_NUMBER \
 	--create --label "Arch Linux" \
 	--loader /vmlinuz-linux \
 	--unicode "root=PARTUUID=$PARTUUID video=efifb:1920x1080 rw initrd=\intel-ucode.img initrd=\initramfs-linux.img"
 
-arch-chroot /mnt /bin/sh <<EOF
+arch-chroot /mnt <<EOF
 ln -sf /usr/share/zoneinfo/America/Campo_Grande /etc/localtime
 hwclock --systohc
 echo "pt_BR.UTF-8 UTF-8" >> /etc/locale.gen
