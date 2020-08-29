@@ -35,7 +35,7 @@ mount "$DISK$LINUX_PARTITION" /mnt
 mkdir /mnt/boot
 mount "$DISK$EFI_PARTITION" /mnt/boot
 
-pacstrap /mnt base linux linux-firmware intel-ucode broadcom-wl-dkms iwd
+pacstrap /mnt base linux linux-firmware 
 genfstab -U /mnt >> /mnt/etc/fstab
 
 PARTUUID="$(blkid $DISK$LINUX_PARTITION -s PARTUUID -o value)"
@@ -60,6 +60,11 @@ echo "$HOSTNAME" > /etc/hostname
 { echo "$PASSWORD"; echo "$PASSWORD"; } | passwd
 
 sed -i 's/#Color/Color/g' /etc/pacman.conf
+
+pacman --noconfirm -S intel-ucode linux-headers nvidia-dkms nvidia-settings broadcom-wl-dkms iwd
+systemctl enable systemd-networkd.service
+systemctl enable systemd-resolved.service
+systemctl enable iwd.service
 
 exit
 EOF
