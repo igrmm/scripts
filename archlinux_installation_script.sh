@@ -25,13 +25,16 @@ reflector --country Brazil --protocol https --protocol http --latest 10 --sort r
 
 DISK="/dev/nvme0n1"
 EFI_PARTITION="$DISK"p1
-LINUX_PARTITION="$DISK"p2
+SWAP_PARTITION="$DISK"p2
+LINUX_PARTITION="$DISK"p3
 EFI_PARTITION_NUMBER=1
 
 timedatectl set-ntp true
 
 echo y | mkfs.fat -F32 "$EFI_PARTITION"
 echo y | mkfs.ext4 "$LINUX_PARTITION"
+mkswap "$SWAP_PARTITION"
+swapon "$SWAP_PARTITION"
 mount "$LINUX_PARTITION" /mnt
 mkdir /mnt/boot
 mount "$EFI_PARTITION" /mnt/boot
