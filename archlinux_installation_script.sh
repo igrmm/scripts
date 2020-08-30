@@ -62,7 +62,7 @@ echo "$HOSTNAME" > /etc/hostname
 
 sed -i 's/#Color/Color/g' /etc/pacman.conf
 
-pacman --noconfirm -S intel-ucode linux-headers nvidia-dkms nvidia-settings broadcom-wl-dkms iwd
+pacman --noconfirm -S intel-ucode linux-headers nvidia-dkms broadcom-wl-dkms iwd
 systemctl enable systemd-networkd.service
 systemctl enable systemd-resolved.service
 systemctl enable iwd.service
