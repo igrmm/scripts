@@ -4,13 +4,9 @@
 # into the kernel, so no boot loader. This script uses only 1 disk and 3 partitions
 # the first for EFI (esp), second for swap and last for root.
 
-printf 'hostname: '            && read -r HOSTNAME
-printf 'username: '            && read -r USERNAME
 printf 'password: '            && read -r PASSWORD
 
 printf '\n'
-printf 'hostname:         %s\n' "$HOSTNAME"
-printf 'username:         %s\n' "$USERNAME"
 printf 'password:         %s\n' "$PASSWORD"
 printf '\n'
 printf 'Confirm? (y|n): ' && read -r CONFIRMATION
@@ -28,6 +24,7 @@ EFI_PARTITION="$DISK"p1
 SWAP_PARTITION="$DISK"p2
 LINUX_PARTITION="$DISK"p3
 EFI_PARTITION_NUMBER=1
+HOSTNAME="archlinux"
 
 timedatectl set-ntp true
 
