@@ -67,7 +67,7 @@ systemctl enable systemd-networkd.service
 systemctl enable systemd-resolved.service
 systemctl enable iwd.service
 
-echo "[General] > /etc/iwd/main.conf
+echo "[General]" > /etc/iwd/main.conf
 echo "EnableNetworkConfiguration=true" >> /etc/iwd/main.conf
 
 exit
