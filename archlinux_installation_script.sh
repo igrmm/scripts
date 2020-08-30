@@ -55,6 +55,7 @@ echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
 echo "LANG=pt_BR.UTF-8" > /etc/locale.conf
 echo "KEYMAP=br-abnt2" > /etc/vconsole.conf
+localectl set-x11-keymap br abnt2 abnt2
 
 echo "$HOSTNAME" > /etc/hostname
 
