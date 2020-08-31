@@ -170,6 +170,20 @@ ln -s "$DOTFILES"/.config/dunst/dunstrc \
 	"$XDG_CONFIG_HOME"/dunst/dunstrc && \
 	echo "dunst linked."
 
+# ROFI
+[ ! -f "$DOTFILES"/.config/rofi/config.rasi ] && echo "!rofi" && exit
+[ ! -f "$DOTFILES"/.config/rofi/theme.rasi ] && echo "!rofi" && exit
+
+rm -rf "$XDG_CONFIG_HOME"/rofi
+mkdir "$XDG_CONFIG_HOME"/rofi
+
+ln -s "$DOTFILES"/.config/rofi/config.rasi \
+	"$XDG_CONFIG_HOME"/rofi/config.rasi
+
+ln -s "$DOTFILES"/.config/rofi/theme.rasi \
+	"$XDG_CONFIG_HOME"/rofi/theme.rasi && \
+	echo "rofi linked."
+
 # ALACRITTY
 [ ! -f "$DOTFILES"/.config/alacritty/alacritty.yml ] && echo "!alacritty" && exit
 
