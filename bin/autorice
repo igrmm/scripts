@@ -170,6 +170,16 @@ ln -s "$DOTFILES"/.config/dunst/dunstrc \
 	"$XDG_CONFIG_HOME"/dunst/dunstrc && \
 	echo "dunst linked."
 
+# SXHKD
+[ ! -f "$DOTFILES"/.config/sxhkd/sxhkdrc ] && echo "!dunst" && exit
+
+rm -rf "$XDG_CONFIG_HOME"/sxhkd
+mkdir "$XDG_CONFIG_HOME"/sxhkd
+
+ln -s "$DOTFILES"/.config/sxhkd/sxhkdrc \
+	"$XDG_CONFIG_HOME"/sxhkd/sxhkdrc && \
+	echo "sxhkd linked."
+
 # MIME APPS
 [ ! -f "$DOTFILES"/.config/mimeapps.list ] && echo "!mimeapps.list" && exit
 
