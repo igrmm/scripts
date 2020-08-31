@@ -2,8 +2,6 @@
 
 [ -d "$HOME/repositories/dotfiles" ] && DOTFILES="$HOME/repositories/dotfiles" || { echo "!dotfiles"; exit; }
 [ -d "$HOME/repositories/scripts" ] || { echo "!scripts"; exit; }
-[ -d "$HOME/repositories/dwmbar" ] || { echo "!dwmbar"; exit; }
-ln -s "$HOME/repositories/dwmbar/dwmbar" "$HOME/repositories/scripts/bin"
 
 # MAKE CONFIG DIR
 [ ! -d ~/.config ] && mkdir ~/.config && echo "mkdir config" || echo "config ok"
