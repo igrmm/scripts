@@ -170,6 +170,16 @@ ln -s "$DOTFILES"/.config/dunst/dunstrc \
 	"$XDG_CONFIG_HOME"/dunst/dunstrc && \
 	echo "dunst linked."
 
+# POLYBAR
+[ ! -f "$DOTFILES"/.config/polybar/config ] && echo "!polybar" && exit
+
+rm -rf "$XDG_CONFIG_HOME"/polybar
+mkdir "$XDG_CONFIG_HOME"/polybar
+
+ln -s "$DOTFILES"/.config/polybar/config \
+	"$XDG_CONFIG_HOME"/polybar/config && \
+	echo "polybar linked."
+
 # ROFI
 [ ! -f "$DOTFILES"/.config/rofi/config.rasi ] && echo "!rofi" && exit
 [ ! -f "$DOTFILES"/.config/rofi/theme.rasi ] && echo "!rofi" && exit
