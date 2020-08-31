@@ -249,10 +249,8 @@ ln -s "$DOTFILES"/.local/share/applications/vifm.desktop \
 	"$XDG_DATA_HOME"/applications/vifm.desktop && \
 	echo "vifm.desktop linked."
 
-# LINK HDD
-ln -s /media/files ~/files
-
 if [ "$1" = "--post-installation" ]; then
+	ln -s /media/files ~/files
 	git clone https://aur.archlinux.org/yay.git
 	cd yay && makepkg -Asci && cd .. && rm -rf yay
 	yay -S archivemount rar2fs
