@@ -190,9 +190,9 @@ ln -s "$DOTFILES"/.local/share/applications/vifm.desktop \
 # LINK HDD
 ln -s /media/files ~/files
 
-#if [ "$POST_INSTALLATION" = true ]; then
-#	git clone https://aur.archlinux.org/yay.git
-#	cd yay && makepkg -Asci && cd .. && rm -rf yay
-#	yay -S archivemount rar2fs
-#	source /home/$USERNAME/.zprofile
-#fi
+if [ "$1" = "--post-installation" ]; then
+	git clone https://aur.archlinux.org/yay.git
+	cd yay && makepkg -Asci && cd .. && rm -rf yay
+	yay -S archivemount rar2fs
+	exit
+fi
