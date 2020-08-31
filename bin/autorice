@@ -170,6 +170,16 @@ ln -s "$DOTFILES"/.config/dunst/dunstrc \
 	"$XDG_CONFIG_HOME"/dunst/dunstrc && \
 	echo "dunst linked."
 
+# ALACRITTY
+[ ! -f "$DOTFILES"/.config/alacritty/alacritty.yml ] && echo "!alacritty" && exit
+
+rm -rf "$XDG_CONFIG_HOME"/alacritty
+mkdir "$XDG_CONFIG_HOME"/alacritty
+
+ln -s "$DOTFILES"/.config/alacritty/alacritty.yml \
+	"$XDG_CONFIG_HOME"/alacritty/alacritty.yml && \
+	echo "alacritty linked."
+
 # BSPWM
 [ ! -f "$DOTFILES"/.config/bspwm/bspwmrc ] && echo "!bspwm" && exit
 
