@@ -170,6 +170,16 @@ ln -s "$DOTFILES"/.config/dunst/dunstrc \
 	"$XDG_CONFIG_HOME"/dunst/dunstrc && \
 	echo "dunst linked."
 
+# BSPWM
+[ ! -f "$DOTFILES"/.config/bspwm/bspwmrc ] && echo "!bspwm" && exit
+
+rm -rf "$XDG_CONFIG_HOME"/bspwm
+mkdir "$XDG_CONFIG_HOME"/bspwm
+
+ln -s "$DOTFILES"/.config/bspwm/bspwmrc \
+	"$XDG_CONFIG_HOME"/bspwm/bspwmrc && \
+	echo "bspwm linked."
+
 # SXHKD
 [ ! -f "$DOTFILES"/.config/sxhkd/sxhkdrc ] && echo "!sxhkd" && exit
 
