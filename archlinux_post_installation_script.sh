@@ -39,4 +39,9 @@ echo "exec ~/repositories/scripts/bin/autorice --post-installation" \
 
 systemctl enable vnstat.service
 
+mkdir /media
+mkdir /media/files
+mkdir /media/rpi
+mkdir /media/android
+
 { echo "$PASSWORD"; echo "$PASSWORD"; } | passwd "$USERNAME"
