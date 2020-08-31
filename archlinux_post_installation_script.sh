@@ -15,11 +15,26 @@ case "$CONFIRMATION" in
 	*) echo "exit" && exit ;;
 esac
 
-pacman -S base-devel xorg-xinit man-db man-pages nvidia-settings sudo \
-	alsa-utils
+pacman -Syu base-devel xorg-xinit man-db man-pages nvidia-settings sudo \
+	alsa-utils picom xwallpaper libnotify dunst xdotool xclip sxiv \
+	ntfs-3g exfat-utils rsync htop neofetch vifm ffmpegthumbnailer \
+	ghostscript fzf imagemagick scrot pacman-contrib ncdu vnstat \
+	newsboat mpv rclone sxhkd bspwm zsh
 
-useradd -m -G wheel "$USERNAME"
+useradd -m -G wheel -s /bin/zsh "$USERNAME"
+
+echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
+
+mkdir /home/"$USERNAME"/repositories
+
+git clone https://github.com/igrmm/dotfiles /home/"$USERNAME"/repositories/dotfiles
+git clone https://github.com/igrmm/scripts /home/"$USERNAME"/repositories/scripts
+
+chown "$USERNAME:$USERNAME" -R /home/"$USERNAME"
+
+echo "exec ~/repositories/scripts/bin/autorice --post-installation" \
+	> /home/"$USERNAME"/.zprofile
+
+systemctl enable vnstat.service
 
 { echo "$PASSWORD"; echo "$PASSWORD"; } | passwd "$USERNAME"
-
-
