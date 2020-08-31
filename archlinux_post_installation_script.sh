@@ -19,7 +19,9 @@ pacman -Syu base-devel xorg-xinit man-db man-pages nvidia-settings sudo \
 	alsa-utils picom xwallpaper libnotify dunst xdotool xclip sxiv \
 	ntfs-3g exfat-utils rsync htop neofetch vifm ffmpegthumbnailer \
 	ghostscript fzf imagemagick scrot pacman-contrib ncdu vnstat \
-	newsboat mpv rclone sxhkd bspwm zsh
+	newsboat mpv rclone sxhkd bspwm rofi alacritty zsh xcursor-bluecurve \
+	papirus-icon-theme arc-solid-gtk-theme ttf-croscore noto-fonts-emoji \
+	awesome-terminal-fonts noto-fonts ttf-fira-code
 
 useradd -m -G wheel -s /bin/zsh "$USERNAME"
 
