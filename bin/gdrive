@@ -1,7 +1,5 @@
 #!/bin/bash
 
-[ "$(cat /etc/hostname)" != "desktop" ] && echo "not your desktop" && exit
-
 function pull() {
 	rclone sync gdrive: "$GDRIVE_PATH" -P -v
 	notify-send \
