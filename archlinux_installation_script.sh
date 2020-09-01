@@ -36,7 +36,7 @@ mount "$LINUX_PARTITION" /mnt
 mkdir /mnt/boot
 mount "$EFI_PARTITION" /mnt/boot
 
-pacstrap /mnt base linux linux-firmware 
+pacstrap /mnt base linux linux-firmware
 genfstab -U /mnt >> /mnt/etc/fstab
 
 PARTUUID="$(blkid $LINUX_PARTITION -s PARTUUID -o value)"
@@ -71,6 +71,10 @@ systemctl enable iwd.service
 mkdir /etc/iwd
 echo "[General]" > /etc/iwd/main.conf
 echo "EnableNetworkConfiguration=true" >> /etc/iwd/main.conf
+echo "[Network]" >> /etc/iwd/main.conf
+echo "NameResolvingService=systemd" >> /etc/iwd/main.conf
+
+ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 exit
 EOF
