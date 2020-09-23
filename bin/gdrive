@@ -12,6 +12,10 @@ function push() {
 	rclone sync "$GDRIVE_PATH" gdrive: -P -v
 }
 
+function check() {
+	rclone check "$GDRIVE_PATH" gdrive: --size-only
+}
+
 for i in "$@"; do
 	case $i in
 		pull)
@@ -19,6 +23,9 @@ for i in "$@"; do
 			;;
 		push)
 			push
+			;;
+		check)
+			check
 			;;
 		*)
 			exit
