@@ -14,6 +14,9 @@ WM_NAME() {
 # Gdx2D
 [ "$class" = "Gdx2D" ] && echo 'state=floating'
 
+# GdxExample
+[ "$class" = "GdxExample" ] && echo 'state=floating'
+
 # FIREFOX
 [ "$class" = "firefox" ] && echo 'desktop=^10'
 
