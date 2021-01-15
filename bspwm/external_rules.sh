@@ -38,3 +38,4 @@ WM_NAME() {
 
 # BAR
 case "$class" in _bar_*) echo 'state=floating' ;; esac
+case "$class" in _bar_date_) echo 'rectangle=664x704+628+188' ;; esac

@@ -9,8 +9,6 @@ case "$1" in
 			alacritty \
 				--class _bar_date_,_bar_date_ \
 				--title _bar_date_ \
-				--dimensions 66 35 \
-				--position 624 184 \
 				-e sh -c 'cal -y; read' &
 		fi
 		;;
