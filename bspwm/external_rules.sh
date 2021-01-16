@@ -26,6 +26,9 @@ WM_NAME() {
 # THUNDERBIRD
 [ "$class" = "Thunderbird" ] && echo 'desktop=^8'
 
+# THUNDERBIRD MSG COMPOSE
+[ "$instance" = "Msgcompose" ] && echo 'state=floating'
+
 # TELEGRAM
 [ "$instance" = "telegram-desktop" ] && \
 	case "$(WM_NAME)" in
