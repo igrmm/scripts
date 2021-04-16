@@ -29,6 +29,16 @@ WM_NAME() {
 # THUNDERBIRD MSG COMPOSE
 [ "$instance" = "Msgcompose" ] && echo 'state=floating'
 
+# JETBRAINS IDEA SPLASH SCREEN
+[ "$instance" = "jetbrains-idea-ce" ] && \
+	case "$(WM_NAME)" in
+		'"win0"')
+			echo 'state=floating'
+			;;
+		*)
+			;;
+	esac
+
 # TELEGRAM
 [ "$instance" = "telegram-desktop" ] && \
 	case "$(WM_NAME)" in
