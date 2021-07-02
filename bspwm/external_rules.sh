@@ -33,14 +33,20 @@ WM_NAME() {
 [ "$instance" = "Msgcompose" ] && echo 'state=floating'
 
 # JETBRAINS IDEA SPLASH SCREEN
-[ "$instance" = "jetbrains-idea-ce" ] && \
+if [ "$instance" = "jetbrains-idea-ce" ]; then
+	# necessary because diff window is not totally decorated yet
+	sleep 0.1
 	case "$(WM_NAME)" in
+		# splash screen
 		'"win0"')
 			echo 'state=floating'
 			;;
-		*)
+		# git diff window
+		*'[Default Changelist]"')
+			echo 'state=floating rectangle=1052x950+434+65'
 			;;
 	esac
+fi
 
 # TELEGRAM
 [ "$instance" = "telegram-desktop" ] && \
