@@ -20,6 +20,9 @@ WM_NAME() {
 # Gdx2D
 [ "$class" = "Gdx2D" ] && echo 'state=floating'
 
+# Bozo
+[ "$class" = "Bozo" ] && echo 'state=floating'
+
 # GdxExample
 [ "$class" = "GdxExample" ] && echo 'state=floating'
 
