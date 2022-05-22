@@ -26,11 +26,15 @@ WM_NAME() {
 # GdxExample
 [ "$class" = "GdxExample" ] && echo 'state=floating'
 
+# TermoInfinito
+[ "$class" = "TermoInfinito" ] && echo 'state=floating'
+
 # FIREFOX
 [ "$class" = "firefox" ] && echo 'desktop=^10'
 
 # STEAM
 [ "$class" = "Steam" ] && echo 'desktop=^9'
+[ "$WM_NAME" = "Steam" ] && echo 'desktop=^9'
 
 # THUNDERBIRD
 [ "$class" = "Thunderbird" ] && echo 'desktop=^8'
