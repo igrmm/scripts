@@ -1,0 +1,12 @@
+#!/bin/sh
+
+case $1 in
+	work)
+		cp ~/.config/git/config.work ~/.config/git/config ;;
+	personal)
+		cp ~/.config/git/config.personal ~/.config/git/config ;;
+	*)
+		printf "wrong option\n"
+		exit ;;
+esac
+
