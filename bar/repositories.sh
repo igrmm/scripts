@@ -4,7 +4,7 @@ fetch() {
 	if ! pgrep -x check_repositories >/dev/null; then
 		user="$(grep 'username=' $XDG_CONFIG_HOME/git/config|sed s/username=//|tr -d '[:blank:]')"
 		commits="$(check_repositories)"
-		echo "[$user] $commits"
+		[ -n "$commits" ] && echo "[$user] $commits" || echo "[$user]"
 	else
 		notify-send "check_repositories is already running."
 	fi
