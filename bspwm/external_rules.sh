@@ -33,8 +33,7 @@ WM_NAME() {
 [ "$class" = "firefox" ] && echo 'desktop=^10'
 
 # STEAM
-[ "$class" = "Steam" ] && echo 'desktop=^9'
-[ "$WM_NAME" = "Steam" ] && echo 'desktop=^9'
+[ "$(WM_NAME)" = '"Steam"' ] && echo 'desktop=^9'
 
 # THUNDERBIRD
 [ "$class" = "thunderbird" ] && echo 'desktop=^8'
