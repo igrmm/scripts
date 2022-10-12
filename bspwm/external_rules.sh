@@ -23,6 +23,9 @@ WM_NAME() {
 # Bozo
 [ "$class" = "Bozo" ] && echo 'state=floating'
 
+# igt
+[ "$class" = "igt" ] && echo 'state=floating'
+
 # GdxExample
 [ "$class" = "GdxExample" ] && echo 'state=floating'
 
