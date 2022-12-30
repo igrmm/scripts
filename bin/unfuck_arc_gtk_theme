@@ -1,0 +1,6 @@
+#/bin/sh
+
+sudo sed -i 's/direction = LTR//g' /usr/share/themes/Arc-Dark-solid/gtk-2.0/main.rc
+sudo sed -i 's/direction = RTL//g' /usr/share/themes/Arc-Dark-solid/gtk-2.0/main.rc
+sudo sed -i 's/direction = LTR//g' /usr/share/themes/Arc-Dark-solid/gtk-2.0/apps.rc
+sudo sed -i 's/direction = RTL//g' /usr/share/themes/Arc-Dark-solid/gtk-2.0/apps.rc
