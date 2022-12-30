@@ -20,6 +20,12 @@ WM_NAME() {
 # Gdx2D
 [ "$class" = "Gdx2D" ] && echo 'state=floating'
 
+# gdx-tests
+[ "$class" = "gdx-tests" ] && echo 'state=floating'
+
+# shadertoy
+[ "$class" = "Shadertoy" ] && echo 'state=floating'
+
 # Bozo
 [ "$class" = "Bozo" ] && echo 'state=floating'
 
