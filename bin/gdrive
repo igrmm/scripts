@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function pull() {
-	rclone sync gdrive: "$GDRIVE_PATH" -P -v
+	rclone sync gdrive: "$GDRIVE_PATH" -P -v --drive-skip-gdocs
 	notify-send \
 		"Google Drive" \
 		"Google Drive is synched."  \
@@ -9,7 +9,7 @@ function pull() {
 }
 
 function push() {
-	rclone sync "$GDRIVE_PATH" gdrive: -P -v
+	rclone sync "$GDRIVE_PATH" gdrive: -P -v --drive-skip-gdocs
 }
 
 function check() {
