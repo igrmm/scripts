@@ -13,7 +13,7 @@ function push() {
 }
 
 function check() {
-	rclone check "$GDRIVE_PATH" gdrive: --size-only
+	rclone check "$GDRIVE_PATH" gdrive: --size-only --drive-skip-gdocs
 }
 
 for i in "$@"; do
