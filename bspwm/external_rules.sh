@@ -43,9 +43,10 @@ WM_NAME() {
 
 # STEAM
 [ "$(WM_NAME)" = '"Steam"' ] && echo 'desktop=^9'
+[ "$class" = "steam" ] && echo 'desktop=^9'
 
 # THUNDERBIRD
-[ "$class" = "thunderbird" ] && echo 'desktop=^8'
+[ "$class" = "thunderbird-beta" ] && echo 'desktop=^8'
 
 # THUNDERBIRD MSG COMPOSE
 [ "$instance" = "Msgcompose" ] && echo 'state=floating'
