@@ -58,7 +58,7 @@ echo "$HOSTNAME" > /etc/hostname
 
 sed -i 's/#Color/Color/g' /etc/pacman.conf
 
-pacman --noconfirm -S intel-ucode xf86-video-intel iwd zsh
+pacman --noconfirm -S intel-ucode xf86-video-intel iwd zsh xorg-xinit sudo sxhkd bspwm rofi alacritty polybar xorg-xsetroot
 
 useradd -m -G wheel -s /bin/zsh "$USERNAME"
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
