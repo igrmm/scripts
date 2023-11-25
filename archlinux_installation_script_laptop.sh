@@ -3,9 +3,11 @@
 # Personal arch linux installation script. This uses EFISTUB for booting directly
 # into the kernel, so no boot loader.
 
+printf 'username: ' && read -r USERNAME
 printf 'password: '            && read -r PASSWORD
 
 printf '\n'
+printf 'username: %s\n' "$USERNAME"
 printf 'password:         %s\n' "$PASSWORD"
 printf '\n'
 printf 'Confirm? (y|n): ' && read -r CONFIRMATION
@@ -56,7 +58,11 @@ echo "$HOSTNAME" > /etc/hostname
 
 sed -i 's/#Color/Color/g' /etc/pacman.conf
 
-pacman --noconfirm -S intel-ucode xf86-video-intel iwd
+pacman --noconfirm -S intel-ucode xf86-video-intel iwd zsh
+
+useradd -m -G wheel -s /bin/zsh "$USERNAME"
+echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
+{ echo "$PASSWORD"; echo "$PASSWORD"; } | passwd "$USERNAME"
 
 systemctl enable systemd-resolved.service
 systemctl enable iwd.service
@@ -64,10 +70,9 @@ systemctl enable iwd.service
 mkdir /etc/iwd
 echo "[General]" > /etc/iwd/main.conf
 echo "EnableNetworkConfiguration=true" >> /etc/iwd/main.conf
+ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 exit
 EOF
-
-ln -sf ../run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 umount -R /mnt
