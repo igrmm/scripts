@@ -70,7 +70,10 @@ systemctl enable iwd.service
 mkdir /etc/iwd
 echo "[General]" > /etc/iwd/main.conf
 echo "EnableNetworkConfiguration=true" >> /etc/iwd/main.conf
-ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
+
+echo "ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf" \
+    > /home/"$USERNAME"/.zprofile
+chown "$USERNAME:$USERNAME" -R /home/"$USERNAME"/.zprofile
 
 exit
 EOF
