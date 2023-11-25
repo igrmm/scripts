@@ -1,14 +1,14 @@
 #!/bin/sh
 
-# Personal arch linux installation script. This uses EFISTUB for booting directly
-# into the kernel, so no boot loader.
+# Personal arch linux installation script for my laptop. This uses EFISTUB for
+# booting directly into the kernel, so no boot loader.
 
 printf 'username: ' && read -r USERNAME
-printf 'password: '            && read -r PASSWORD
+printf 'password: ' && read -r PASSWORD
 
 printf '\n'
 printf 'username: %s\n' "$USERNAME"
-printf 'password:         %s\n' "$PASSWORD"
+printf 'password: %s\n' "$PASSWORD"
 printf '\n'
 printf 'Confirm? (y|n): ' && read -r CONFIRMATION
 
@@ -22,7 +22,7 @@ DISK="/dev/sda"
 EFI_PARTITION="$DISK"7
 LINUX_PARTITION="$DISK"6
 EFI_PARTITION_NUMBER=7
-HOSTNAME="avellarch"
+HOSTNAME="laptop"
 
 timedatectl set-timezone America/Campo_Grande
 timedatectl set-ntp true
