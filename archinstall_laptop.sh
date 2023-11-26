@@ -58,7 +58,7 @@ echo "$HOSTNAME" > /etc/hostname
 
 sed -i 's/#Color/Color/g' /etc/pacman.conf
 
-pacman --noconfirm -S intel-ucode xf86-video-intel iwd zsh xorg-xinit sudo sxhkd bspwm rofi alacritty polybar xorg-xsetroot
+pacman --noconfirm -S git linux-headers base-devel intel-ucode xf86-video-intel iwd zsh xorg-xinit sudo sxhkd bspwm rofi alacritty polybar xorg-xsetroot
 
 useradd -m -G wheel -s /bin/zsh "$USERNAME"
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
@@ -71,8 +71,12 @@ mkdir /etc/iwd
 echo "[General]" > /etc/iwd/main.conf
 echo "EnableNetworkConfiguration=true" >> /etc/iwd/main.conf
 
-echo "ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf" \
-    > /home/"$USERNAME"/.zprofile
+echo "sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf \
+    git clone https://aur.archlinux.org/yay.git \
+    cd yay && makepkg -Asci && cd .. && rm -rf yay \
+    yay -S nvidia-470xx-dkms" \
+    >> /home/"$USERNAME"/.zprofile
+
 chown "$USERNAME:$USERNAME" -R /home/"$USERNAME"/.zprofile
 
 exit
