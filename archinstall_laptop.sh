@@ -58,7 +58,7 @@ echo "$HOSTNAME" > /etc/hostname
 
 sed -i 's/#Color/Color/g' /etc/pacman.conf
 
-pacman --noconfirm -S git linux-headers base-devel intel-ucode xf86-video-intel iwd zsh xorg-xinit sudo sxhkd bspwm rofi alacritty polybar xorg-xsetroot
+pacman --noconfirm -S git linux-headers base-devel intel-ucode xf86-video-intel iwd zsh xorg-xinit sudo sxhkd bspwm rofi alacritty polybar xorg-xsetroot polkit
 
 useradd -m -G wheel -s /bin/zsh "$USERNAME"
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
@@ -71,13 +71,22 @@ mkdir /etc/iwd
 echo "[General]" > /etc/iwd/main.conf
 echo "EnableNetworkConfiguration=true" >> /etc/iwd/main.conf
 
-echo "sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf \
-    git clone https://aur.archlinux.org/yay.git \
-    cd yay && makepkg -Asci && cd .. && rm -rf yay \
-    yay -S nvidia-470xx-dkms" \
-    >> /home/"$USERNAME"/.zprofile
+echo "#run finish_installation.sh after getting internet" \
+    > /home/"$USERNAME"/.zprofile
 
-chown "$USERNAME:$USERNAME" -R /home/"$USERNAME"/.zprofile
+echo "git clone https://aur.archlinux.org/yay.git" \
+    > /home/"$USERNAME"/finish_installation.sh
+
+echo "cd yay && makepkg -Asci && cd .. && rm -rf yay" \
+    >> /home/"$USERNAME"/finish_installation.sh
+
+echo "yay -S nvidia-470xx-dkms" \
+    >> /home/"$USERNAME"/finish_installation.sh
+
+echo "sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf" \
+    >> /home/"$USERNAME"/finish_installation.sh
+
+chown "$USERNAME:$USERNAME" -R /home/"$USERNAME"
 
 exit
 EOF
