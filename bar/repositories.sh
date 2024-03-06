@@ -1,7 +1,7 @@
 #!/bin/sh
 
 fetch() {
-	if ! pgrep -x check_repositories >/dev/null; then
+	if ! pgrep -f check_repositories >/dev/null; then
 		user="$(grep 'username=' $XDG_CONFIG_HOME/git/config|sed s/username=//|tr -d '[:blank:]')"
 		commits="$(check_repositories)"
 		[ -n "$commits" ] && echo "[$user] $commits" || echo "[$user]"
