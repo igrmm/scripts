@@ -38,6 +38,9 @@ WM_NAME() {
 # TermoInfinito
 [ "$class" = "TermoInfinito" ] && echo 'state=floating'
 
+# Gnome dialogs
+[ "$class" = "zenity" ] && echo 'state=floating'
+
 # FIREFOX
 [ "$class" = "firefox" ] && echo 'desktop=^10'
 
