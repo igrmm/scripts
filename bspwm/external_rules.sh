@@ -17,6 +17,9 @@ WM_NAME() {
 # Calculator
 [ "$class" = "calculator" ] && echo 'state=floating rectangle=300x300+810+390'
 
+# Ferdium/Whatsapp
+[ "$class" = "Ferdium" ] && echo 'state=floating rectangle=900x900+510+90'
+
 # Gdx2D
 [ "$class" = "Gdx2D" ] && echo 'state=floating'
 
