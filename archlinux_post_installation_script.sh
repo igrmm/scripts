@@ -20,7 +20,7 @@ pacman -Syu base-devel xorg-xinit man-db man-pages nvidia-settings sudo \
 	ntfs-3g exfat-utils rsync htop neofetch vifm ffmpegthumbnailer \
 	ghostscript fzf imagemagick scrot pacman-contrib ncdu vnstat \
 	newsboat mpv rclone sxhkd bspwm rofi alacritty zsh xcursor-bluecurve \
-	papirus-icon-theme arc-solid-gtk-theme ttf-croscore noto-fonts-emoji \
+	epapirus-icon-theme arc-solid-gtk-theme ttf-croscore noto-fonts-emoji \
 	awesome-terminal-fonts noto-fonts ttf-fira-code ueberzug xorg-xsetroot
 
 useradd -m -G wheel -s /bin/zsh "$USERNAME"
