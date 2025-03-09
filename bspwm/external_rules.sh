@@ -11,8 +11,8 @@ WM_NAME() {
 	xprop -id "$wid" '\t$0' WM_NAME | cut -f 2
 }
 
-# Vifm
-[ "$class" = "vifm" ] && echo 'state=floating'
+# yazi
+[ "$class" = "yazi" ] && echo 'state=floating'
 
 # Calculator
 [ "$class" = "calculator" ] && echo 'state=floating rectangle=300x300+810+390'
