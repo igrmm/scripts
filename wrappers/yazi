@@ -1,0 +1,10 @@
+#!/bin/sh
+
+tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+/usr/bin/yazi "$@" --cwd-file="$tmp"
+cwd="$(cat "$tmp")"
+rm $tmp
+if [ "$cwd" != "$PWD" ]; then
+    cd "$cwd"
+    $SHELL
+fi
