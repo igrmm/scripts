@@ -74,7 +74,7 @@ if [ "$instance" = "jetbrains-idea-ce" ]; then
 fi
 
 # TELEGRAM
-[ "$instance" = "telegram-desktop" ] && \
+[ "$instance" = "Telegram" ] && \
 	case "$(WM_NAME)" in
 		'"Media viewer"')
 			;;
